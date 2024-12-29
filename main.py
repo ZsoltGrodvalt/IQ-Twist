@@ -9,9 +9,6 @@ solution = {rL:[(0,0),1],
             g3:[(0,0),1]}
 '''
 
-solution = []
-board = Board([])
-
 def emptyTopLeft():
         '''Returns the top left corner that is still empty.'''
         for row in range(HEIGHT):
@@ -77,6 +74,14 @@ def displaySolution():
         surface.blit(guiPieceGenerator(pieceType,rot).img,(startingPos[1]*100,startingPos[0]*100))
         # surface.blit(RedL(sol[3]).img,(500,200))
 
+    for pin in board.pin_list:
+        colorDict = {'R':10,'G':11,'B':12,'Y':13}
+        pieceType = colorDict[pin[0]]
+        dict = {'A':0,'B':1,'C':2,'D':3}
+        row = dict[pin[2]]
+        col = int(pin[1]) - 1
+        surface.blit(guiPieceGenerator(pieceType,0).img,(col*100,row*100))
+
     while True:
         # Quitting the game
         for event in pygame.event.get():
@@ -137,6 +142,8 @@ def recursiveSolver(piecetype_list:list[Piece]):
 
 
 if __name__ == '__main__':
+    solution = []
+    board = Board(['Y6B'])
     piecetype_list = [0,1,2,3,4,5,6,7]
     recursiveSolver(piecetype_list)
     print(board)

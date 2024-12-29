@@ -18,6 +18,7 @@ class Board:
               ['.','.','.','.','.','.','.','.'],
               ['.','.','.','.','.','.','.','.'],
               ['.','.','.','.','.','.','.','.']]
+        self.pin_list = []
         self.addPins(newPins)
         self.grid = [['.','.','.','.','.','.','.','.'],
               ['.','.','.','.','.','.','.','.'],
@@ -42,6 +43,10 @@ class Board:
             newPins (list[str]): list of pins, eg. ['R3A', 'R6C','B2B'] for 2 red and 1 blue pin.
         """
         for pin in newPins:
+            # Add pins to pin_list
+            self.pin_list.append(pin)
+            
+            # Add pins to grid
             colorDict = {'R':0,'G':1,'B':2,'Y':3}
             dict = {'A':0,'B':1,'C':2,'D':3}
             row = dict[pin[2]]

@@ -44,6 +44,14 @@ def guiPieceGenerator(pieceType:int,rot:int):
             return Yellow3(rot)
         case 7:
             return Yellow5(rot)
+        case 10:
+            return RedPin(0)
+        case 11:
+            return GreenPin(0)
+        case 12:
+            return BluePin(0)
+        case 13:
+            return YellowPin(0)
 
 class RedL(Piece):
     def __init__(self,rotation):
@@ -111,13 +119,13 @@ if __name__ == '__main__':
     surface.blit(Yellow3(3).img,(0,100)) 
     surface.blit(Yellow5(3).img,(500,0)) 
 
-    surface.blit(YellowPin(3).img,(500,200)) 
-    surface.blit(YellowPin(3).img,(100,200))
-    surface.blit(BluePin(3).img,(0,0))  
-    surface.blit(BluePin(3).img,(300,100))
-    surface.blit(GreenPin(3).img,(700,300)) 
-    surface.blit(GreenPin(3).img,(500,300))
-    surface.blit(RedPin(3).img,(400,300))
+    surface.blit(YellowPin(0).img,(500,200)) 
+    surface.blit(YellowPin(0).img,(100,200))
+    surface.blit(BluePin(0).img,(0,0))  
+    surface.blit(BluePin(0).img,(300,100))
+    surface.blit(GreenPin(0).img,(700,300)) 
+    surface.blit(GreenPin(0).img,(500,300))
+    surface.blit(RedPin(0).img,(400,300))
 
     # for i in range(4):
     #     surface.blit(Yellow5(i).img,(300*i,0)) 

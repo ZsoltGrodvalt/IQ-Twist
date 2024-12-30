@@ -334,6 +334,24 @@ class Yellow5(Piece):
                 self.shape = [['',0,''],[1,1,0],['','',0]]
 
 
+def pieceGenerator(pieceType:str,rot:int):
+    match pieceType:
+        case 'RedL':
+            return RedL(rot)
+        case 'RedZ':
+            return RedZ(rot)
+        case 'Green3':
+            return Green3(rot)
+        case 'Green4':
+            return Green4(rot)
+        case 'Blue4':
+            return Blue4(rot)
+        case 'Blue5':
+            return Blue5(rot)
+        case 'Yellow3':
+            return Yellow3(rot)
+        case 'Yellow5':
+            return Yellow5(rot)
 
 if __name__ == '__main__':
     board = Board(['B3A', 'R6C','B2B'])

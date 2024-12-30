@@ -1,8 +1,8 @@
 import pygame
 from pygame.transform import rotate, flip
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 400
+SURFACE_WIDTH = 800
+SURFACE_HEIGHT = 400
 BLOCK_SIZE = 100
 
 RED = (205,0,0)
@@ -28,29 +28,29 @@ class Piece:
 
 def guiPieceGenerator(pieceType:int,rot:int):
     match pieceType:
-        case 0:
+        case 'RedL':
             return RedL(rot)
-        case 1:
+        case 'RedZ':
             return RedZ(rot)
-        case 2:
+        case 'Green3':
             return Green3(rot)
-        case 3:
+        case 'Green4':
             return Green4(rot)
-        case 4:
+        case 'Blue4':
             return Blue4(rot)
-        case 5:
+        case 'Blue5':
             return Blue5(rot)
-        case 6:
+        case 'Yellow3':
             return Yellow3(rot)
-        case 7:
+        case 'Yellow5':
             return Yellow5(rot)
-        case 10:
+        case 'RedPin':
             return RedPin(0)
-        case 11:
+        case 'GreenPin':
             return GreenPin(0)
-        case 12:
+        case 'BluePin':
             return BluePin(0)
-        case 13:
+        case 'YellowPin':
             return YellowPin(0)
 
 class RedL(Piece):
@@ -104,9 +104,14 @@ class GreenPin(Piece):
 
 if __name__ == '__main__':
     pygame.init()
-    surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    X_RIM = 50
+    Y_RIM = 50
+    GUI_WIDTH = SURFACE_WIDTH + X_RIM
+    GUI_HEIGHT = SURFACE_HEIGHT + Y_RIM
+
+    main_surface = pygame.display.set_mode((GUI_WIDTH, GUI_HEIGHT))
+    surface = pygame.Surface((SURFACE_WIDTH, SURFACE_HEIGHT))
     pygame.display.set_caption("IQTwist")
-    # surface.fill(WHITE)
 
 
     # Adds the img to the surface
@@ -127,11 +132,20 @@ if __name__ == '__main__':
     surface.blit(GreenPin(0).img,(500,300))
     surface.blit(RedPin(0).img,(400,300))
 
-    # for i in range(4):
-    #     surface.blit(Yellow5(i).img,(300*i,0)) 
-    # for i in range(4):
-    #     surface.blit(Yellow5(i+4).img,(300*i,400)) 
+    main_surface.blit(surface,(X_RIM,Y_RIM))
+    font = pygame.font.SysFont('Arial', 50)
     
+    for y in range(1,5):
+        yletter = font.render(chr(64+y), True, WHITE)
+        y_Rect = yletter.get_rect()
+        y_Rect.center = (X_RIM//2, Y_RIM + 50 + 100*(y-1))
+        main_surface.blit(yletter,y_Rect)
+
+    for x in range(1,9):
+        xletter = font.render(str(x), True, WHITE)
+        x_Rect = xletter.get_rect()
+        x_Rect.center = (X_RIM + 50 + 100*(x-1), Y_RIM//2)
+        main_surface.blit(xletter,x_Rect)
 
     # Main loop
     while True:

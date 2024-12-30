@@ -1,13 +1,7 @@
 import pygame,time
-from Pieces import HEIGHT,WIDTH,Board,Piece,RedL,RedZ,Blue4,Blue5,Green3,Green4,Yellow3,Yellow5
+from Pieces import HEIGHT,WIDTH,Board,Piece,RedL,RedZ,Blue4,Blue5,Green3,Green4,Yellow3,Yellow5,pieceGenerator
 import GUI_Pieces
-from GUI_Pieces import SCREEN_HEIGHT,SCREEN_WIDTH,guiPieceGenerator
-
-'''
-solution = {rL:[(0,0),1],
-            rZ:[(0,0),1],
-            g3:[(0,0),1]}
-'''
+from GUI_Pieces import SURFACE_HEIGHT,SURFACE_WIDTH,WHITE,guiPieceGenerator
 
 def emptyTopLeft():
         '''Returns the top left corner that is still empty.'''
@@ -19,45 +13,31 @@ def emptyTopLeft():
 def printSolutionList():
     print('------ Solution ------ ')
     for sol in solution:
-        print(f'({sol[0]}) {pieceGenerator(sol[1],sol[3]).__class__.__name__} {sol[2]} rot={sol[3]}')
+        id = sol[0]
+        pieceType = sol[1]
+        pos = sol[2]
+        rot = sol[3]
+        print(f'({id}) {pieceType} pos={pos} rot={rot}')
     print('----------------------')
-
-def printPieceTypeList(piecetype_list):
-    print('piecetype_list: ',end='[')
-    for idx,piecetype in enumerate(piecetype_list):
-        if idx == len(piecetype_list) - 1:
-            print(pieceGenerator(piecetype,0).__class__.__name__,end=']\n')
-        else:
-            print(pieceGenerator(piecetype,0).__class__.__name__,end=', ')
-
-def pieceGenerator(pieceType:int,rot:int):
-    match pieceType:
-        case 0:
-            return RedL(rot)
-        case 1:
-            return RedZ(rot)
-        case 2:
-            return Green3(rot)
-        case 3:
-            return Green4(rot)
-        case 4:
-            return Blue4(rot)
-        case 5:
-            return Blue5(rot)
-        case 6:
-            return Yellow3(rot)
-        case 7:
-            return Yellow5(rot)
         
 def numberOfRotations(pieceType):
-    if pieceType == 4 or pieceType == 6:
+    """
+    Returns the number of possible rotations for a given piece type.
+    """
+    if pieceType in ['Yellow3','Blue4']:
         return 4
     else:
         return 8
     
 def displaySolution():
     pygame.init()
-    surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    X_RIM = 50
+    Y_RIM = 50
+    GUI_WIDTH = SURFACE_WIDTH + X_RIM
+    GUI_HEIGHT = SURFACE_HEIGHT + Y_RIM
+
+    main_surface = pygame.display.set_mode((GUI_WIDTH, GUI_HEIGHT))
+    surface = pygame.Surface((SURFACE_WIDTH, SURFACE_HEIGHT))
     pygame.display.set_caption("IQTwist")
 
     for sol in solution:
@@ -82,6 +62,20 @@ def displaySolution():
         col = int(pin[1]) - 1
         surface.blit(guiPieceGenerator(pieceType,0).img,(col*100,row*100))
 
+    main_surface.blit(surface,(X_RIM,Y_RIM))
+    font = pygame.font.SysFont('Arial', 50)
+    
+    for y in range(1,5):
+        yletter = font.render(chr(64+y), True, WHITE)
+        y_Rect = yletter.get_rect()
+        y_Rect.center = (X_RIM//2, Y_RIM + 50 + 100*(y-1))
+        main_surface.blit(yletter,y_Rect)
+
+    for x in range(1,9):
+        xletter = font.render(str(x), True, WHITE)
+        x_Rect = xletter.get_rect()
+        x_Rect.center = (X_RIM + 50 + 100*(x-1), Y_RIM//2)
+        main_surface.blit(xletter,x_Rect)
     while True:
         # Quitting the game
         for event in pygame.event.get():
@@ -100,20 +94,19 @@ def recursiveSolver(piecetype_list:list[Piece]):
     Tries to put the last piece to the top left position trying all rotations. If it doesn't succeed it returns 0.
     If a piece can be inserted, it logs the position and the rotation in the 'solution' list.
     '''
-    # printPieceTypeList(piecetype_list)
+    # print(piecetype_list)
     # printSolutionList()
     # print(board)
     # displaySolution()
     topleft = emptyTopLeft()
     # print(emptyTopLeft())
     for newPieceType in piecetype_list:
-        # print(f'>>{pieceGenerator(newPieceType,0).__class__.__name__}')
+        # print(f'>>{newPieceType}')
         for rot in range(numberOfRotations(newPieceType)):
             # print(f'rot={rot}')
             newPiece = pieceGenerator(newPieceType,rot)
             id = 8 - len(piecetype_list)
             if board.insertPiece(id,newPiece,topleft):
-                # piecetype_list.remove(newPieceType)
                 solution.append([id,newPieceType,topleft,rot])
                 new_piecetype_list = piecetype_list.copy()
                 new_piecetype_list.remove(newPieceType)
@@ -132,7 +125,7 @@ def recursiveSolver(piecetype_list:list[Piece]):
                         # recursion returned FALSE -> another rotation or piece has to be tried in this position.
                         solution.remove([id,newPieceType,topleft,rot])
                         board.removePiece(id)  # (UN)COMMENT THIS to see the first fill
-                        # printPieceTypeList(piecetype_list)
+                        # print(piecetype_list)
             # Couldn't insert piece -> try the next rotation.
         # None of the rotations have suceeded -> try another piece
     # No combination was correct
@@ -140,11 +133,10 @@ def recursiveSolver(piecetype_list:list[Piece]):
     return False
 
 
-
 if __name__ == '__main__':
     solution = []
-    board = Board(['Y6B'])
-    piecetype_list = [0,1,2,3,4,5,6,7]
+    board = Board([])
+    piecetype_list = ['RedL','RedZ','Green3','Green4','Blue4','Blue5','Yellow3','Yellow5']
     recursiveSolver(piecetype_list)
     print(board)
     printSolutionList()

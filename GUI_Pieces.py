@@ -101,59 +101,65 @@ class GreenPin(Piece):
     def __init__(self,rotation):
         super().__init__(rotation)
 
+class MainSurface:
+    def __init__(self,X_RIM=50,Y_RIM=50):
+        pygame.init()
+        self.X_RIM = X_RIM
+        self.Y_RIM = Y_RIM
+        self.main_surface = pygame.display.set_mode((SURFACE_WIDTH+X_RIM, SURFACE_HEIGHT+Y_RIM))
+        self.surface = pygame.Surface((SURFACE_WIDTH, SURFACE_HEIGHT))
+        pygame.display.set_caption("IQTwist")
+
+    def addPiece(self,pieceType:str,rotation:int,pos:tuple):
+        '''### pos(row,col)'''
+        self.surface.blit(guiPieceGenerator(pieceType,rotation).img,(pos[1]*100,pos[0]*100))
+
+    def addPin(self,pinType:str,pos:tuple):
+        self.surface.blit(guiPieceGenerator(pinType,0).img,(pos[1]*100,pos[0]*100))
+
+    def display(self):
+        self.main_surface.blit(self.surface,(self.X_RIM,self.Y_RIM))
+        font = pygame.font.SysFont('Arial', 50)
+        
+        for y in range(1,5):
+            yletter = font.render(chr(64+y), True, WHITE)
+            y_Rect = yletter.get_rect()
+            y_Rect.center = (self.X_RIM//2, self.Y_RIM + 50 + 100*(y-1))
+            self.main_surface.blit(yletter,y_Rect)
+
+        for x in range(1,9):
+            xletter = font.render(str(x), True, WHITE)
+            x_Rect = xletter.get_rect()
+            x_Rect.center = (self.X_RIM + 50 + 100*(x-1), self.Y_RIM//2)
+            self.main_surface.blit(xletter,x_Rect)
+
+        # Main loop
+        while True:
+            # Quitting the game
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+
+            # Update the display
+            pygame.display.update() 
 
 if __name__ == '__main__':
-    pygame.init()
-    X_RIM = 50
-    Y_RIM = 50
-    GUI_WIDTH = SURFACE_WIDTH + X_RIM
-    GUI_HEIGHT = SURFACE_HEIGHT + Y_RIM
+    mainSurface = MainSurface()
+    mainSurface.addPiece('RedL',2,(2,5))
+    mainSurface.addPiece('RedZ',5,(0,2))
+    mainSurface.addPiece('Green3',0,(0,0))
+    mainSurface.addPiece('Green4',5,(1,4))
+    mainSurface.addPiece('Blue4',0,(0,3))
+    mainSurface.addPiece('Blue5',2,(2,1))
+    mainSurface.addPiece('Yellow3',3,(1,0))
+    mainSurface.addPiece('Yellow5',3,(0,5))
+    mainSurface.addPin('YellowPin',(2,5))
+    mainSurface.addPin('YellowPin',(2,1))
+    mainSurface.addPin('BluePin',(0,0))
+    mainSurface.addPin('BluePin',(1,3))
+    mainSurface.addPin('GreenPin',(3,7))
+    mainSurface.addPin('GreenPin',(3,5))
+    mainSurface.addPin('RedPin',(3,4))
 
-    main_surface = pygame.display.set_mode((GUI_WIDTH, GUI_HEIGHT))
-    surface = pygame.Surface((SURFACE_WIDTH, SURFACE_HEIGHT))
-    pygame.display.set_caption("IQTwist")
-
-
-    # Adds the img to the surface
-    surface.blit(RedL(2).img,(500,200)) 
-    surface.blit(RedZ(5).img,(200,0)) 
-    surface.blit(Green3(0).img,(0,0)) 
-    surface.blit(Green4(5).img,(400,100)) 
-    surface.blit(Blue4(0).img,(300,0)) 
-    surface.blit(Blue5(2).img,(100,200)) 
-    surface.blit(Yellow3(3).img,(0,100)) 
-    surface.blit(Yellow5(3).img,(500,0)) 
-
-    surface.blit(YellowPin(0).img,(500,200)) 
-    surface.blit(YellowPin(0).img,(100,200))
-    surface.blit(BluePin(0).img,(0,0))  
-    surface.blit(BluePin(0).img,(300,100))
-    surface.blit(GreenPin(0).img,(700,300)) 
-    surface.blit(GreenPin(0).img,(500,300))
-    surface.blit(RedPin(0).img,(400,300))
-
-    main_surface.blit(surface,(X_RIM,Y_RIM))
-    font = pygame.font.SysFont('Arial', 50)
-    
-    for y in range(1,5):
-        yletter = font.render(chr(64+y), True, WHITE)
-        y_Rect = yletter.get_rect()
-        y_Rect.center = (X_RIM//2, Y_RIM + 50 + 100*(y-1))
-        main_surface.blit(yletter,y_Rect)
-
-    for x in range(1,9):
-        xletter = font.render(str(x), True, WHITE)
-        x_Rect = xletter.get_rect()
-        x_Rect.center = (X_RIM + 50 + 100*(x-1), Y_RIM//2)
-        main_surface.blit(xletter,x_Rect)
-
-    # Main loop
-    while True:
-        # Quitting the game
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-
-        # Update the display
-        pygame.display.update()
+    mainSurface.display()

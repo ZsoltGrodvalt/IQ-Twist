@@ -1,3 +1,5 @@
+import copy
+
 HEIGHT = 4
 WIDTH = 8
 
@@ -14,16 +16,10 @@ YELLOW = 3
 
 class Board:
     def __init__(self,newPins):
-        self.pins = [['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.']]
+        self.pins = copy.deepcopy(EMPTY_GRID)
         self.pin_list = []
         self.addPins(newPins)
-        self.grid = [['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.']]
+        self.grid = copy.deepcopy(EMPTY_GRID)
 
     def __str__(self):
         string = '  >> Board <<         >> Pins <<\n'
@@ -53,33 +49,43 @@ class Board:
             col = int(pin[1]) - 1
             self.pins[row][col] = colorDict[pin[0]]
 
+    def addPiece(self,id,pieceType:str,rotation:int,topLeft:tuple) -> bool:
+        '''Adds the piece to the grid. Returns True if successful, False otherwise.'''
+        piece = pieceGenerator(pieceType,rotation)
+        if self.checkPotentialBlocks(piece,topLeft):
+            self.insertPiece(id,piece,topLeft)
+            return True
+        return False
 
-    def insertPiece(self,order,piece,startingPos):
+    def addPiece(self,id,piece,topLeft):
         """
-        First checks whether the blocks are free, if yes, it inserts the pieceand returns True.\\
+        First checks whether the blocks are free, if yes, it inserts the piece and returns True.\\
         Returns False otherwise.\\
         Checks if the top left corner of the piece is not empty. If it is, it has to 'shift' the piece until the top left is 1/0.
+        ### pos(row,col)
         """        
         shift = 0
         for block in piece.shape[0]:
             if block == '':
                 shift += 1
+            else:
+                break
         # print(f'shift={shift}')
-        shiftedStartingPos = (startingPos[0],startingPos[1]-shift)
+        shiftedTopLeft = (topLeft[0],topLeft[1]-shift)
 
-        if self.checkPotentialBlocks(piece,shiftedStartingPos):
-            self.insertBlocks(order,piece,shiftedStartingPos)
+        if self.checkPotentialBlocks(piece,shiftedTopLeft):
+            self.insertPiece(id,piece,shiftedTopLeft)
             return True
         return False
         
 
-    def checkPotentialBlocks(self,piece,startingPos):
+    def checkPotentialBlocks(self,piece,topLeft):
         '''# Internal function.
         
         Checks whether the blocks where the new piece will be inserted are free and are in the grid.
         '''
-        startingRow = startingPos[0]
-        startingColumn = startingPos[1]
+        startingRow = topLeft[0]
+        startingColumn = topLeft[1]
         if ((startingRow < 0) or (startingColumn < 0) or (startingRow + piece.ydim) > HEIGHT) or  ((startingColumn + piece.xdim) > WIDTH):
             # print(f'[LOG] Part of "{piece.__class__.__name__}" would be outside the grid.')
             return False
@@ -104,7 +110,7 @@ class Board:
         # print('Insert block returns True.')
         return True
 
-    def insertBlocks(self,order,piece,startingPos):
+    def insertPiece(self,id,piece,startingPos):
         '''# Internal function.'''
         startingRow = startingPos[0]
         startingColumn = startingPos[1]
@@ -114,7 +120,7 @@ class Board:
                 c = startingColumn + columnIndex
                 # Overwrite the grid.
                 if block != '':
-                    self.grid[r][c] = order
+                    self.grid[r][c] = id
 
     def removePiece(self,pieceNumber):
         '''Inserts '.' instead of 'pieceNumber'. '''
@@ -354,16 +360,17 @@ def pieceGenerator(pieceType:str,rot:int):
             return Yellow5(rot)
 
 if __name__ == '__main__':
-    board = Board(['B3A', 'R6C','B2B'])
+    # board = Board(['B3A', 'R6C','B2B'])
+    board = Board(['B2C','B8D'])
     # print(board)
     # print(Blue4(1))
     # board.insertPiece(0,Blue4(2),(0,0))
     # board.insertPiece(1,Blue4(0),(3,1))
     # board.removePiece(1)
     # print(board)
-    redL = RedL(2)
-    print(redL)
-    board.insertPiece(1,redL,(1,5))
+    piece = Yellow5(0)
+    print(piece)
+    board.addPiece(1,piece,(1,3))
     print(board)
     # board.addPins(['Y4C'])
     # print(board)

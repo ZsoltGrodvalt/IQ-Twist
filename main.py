@@ -137,7 +137,6 @@ def solve(exerciseSetup_pieces:list,exerciseSetup_pins:list[str]):
         return False
 
 if __name__ == '__main__':
-    # Starter Ex.1
     exerciseSetup_pins = ['R6B','G3C','B2B','B1C','Y4B','Y5C']
     exerciseSetup_pieces = [['Green4',6,(2,3)]]
 

@@ -93,10 +93,10 @@ exerciseSetup_pieces = [['Green4',6,(2,3)]]
   </tr>
   <tr>
     <td>Blue4</td>
-    <td><img src="images/Blue4.png" alt="Piece" width="80" height="10"></td>
-    <td><img src="images/Blue4.png" alt="Piece" width="80" height="10" style="transform: rotate(-90deg);"></td>
-    <td><img src="images/Blue4.png" alt="Piece" width="80" height="10" style="transform: rotate(-180deg);"></td>
-    <td><img src="images/Blue4.png" alt="Piece" width="80" height="10" style="transform: rotate(-270deg);"></td>
+    <td><img src="images/Blue4.png" alt="Piece" width="80" height="20"></td>
+    <td><img src="images/Blue4.png" alt="Piece" width="80" height="20" style="transform: rotate(-90deg);"></td>
+    <td><img src="images/Blue4.png" alt="Piece" width="80" height="20" style="transform: rotate(-180deg);"></td>
+    <td><img src="images/Blue4.png" alt="Piece" width="80" height="20" style="transform: rotate(-270deg);"></td>
     <td>-</td>
     <td>-</td>
     <td>-</td>
@@ -115,10 +115,10 @@ exerciseSetup_pieces = [['Green4',6,(2,3)]]
   </tr>
   <tr>
     <td>Yellow3</td>
-    <td><img src="images/Yellow3.png" alt="Piece" width="80" height="10"></td>
-    <td><img src="images/Yellow3.png" alt="Piece" width="80" height="10" style="transform: rotate(-90deg);"></td>
-    <td><img src="images/Yellow3.png" alt="Piece" width="80" height="10" style="transform: rotate(-180deg);"></td>
-    <td><img src="images/Yellow3.png" alt="Piece" width="80" height="10" style="transform: rotate(-270deg);"></td>
+    <td><img src="images/Yellow3.png" alt="Piece" width="60" height="20"></td>
+    <td><img src="images/Yellow3.png" alt="Piece" width="60" height="20" style="transform: rotate(-90deg);"></td>
+    <td><img src="images/Yellow3.png" alt="Piece" width="60" height="20" style="transform: rotate(-180deg);"></td>
+    <td><img src="images/Yellow3.png" alt="Piece" width="60" height="20" style="transform: rotate(-270deg);"></td>
     <td>-</td>
     <td>-</td>
     <td>-</td>

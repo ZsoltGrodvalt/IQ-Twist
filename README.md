@@ -2,11 +2,15 @@
 This is a game solving project for the logic game called IQ Twist where you have to fit pieces into a frame keeping in mind certain constraints like coloured pins.
 
 It's a really fun game, you can buy it [here](https://www.smartgames.eu/uk/one-player-games/iq-twist), it's perfect for Christmas.
+It's a really fun game, you can buy it [here](https://www.smartgames.eu/uk/one-player-games/iq-twist), it's perfect for Christmas.
 <div align="center">
   <a href="https://www.smartgames.eu/uk/one-player-games/iq-twist">
     <img src="images/iqtwist_img.png" alt="iqLogo" width="400" height="225">
   </a>
 </div>
+
+> [!NOTE]  
+> This is not an illegal copy of the game, you cannot move around the pieces and such, it is only meant to implement the algorithm, and display the result in the end.
 
 > [!NOTE]  
 > This is not an illegal copy of the game, you cannot move around the pieces and such, it is only meant to implement the algorithm, and display the result in the end.

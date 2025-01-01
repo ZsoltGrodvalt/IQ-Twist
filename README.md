@@ -1,7 +1,6 @@
 ## IQ Twist
-This is a game solving project for the logic game called IQ Twist where you have to fit pieces into a frame keeping in mind certain constraints like coloured pins.
+This is a game solving project for the logic game called IQ Twist where you have to fit pieces into a frame keeping in mind certain constraints like pins and colours.
 
-It's a really fun game, you can buy it [here](https://www.smartgames.eu/uk/one-player-games/iq-twist), it's perfect for Christmas.
 It's a really fun game, you can buy it [here](https://www.smartgames.eu/uk/one-player-games/iq-twist), it's perfect for Christmas.
 <div align="center">
   <a href="https://www.smartgames.eu/uk/one-player-games/iq-twist">

@@ -1,23 +1,10 @@
 import pygame
 from pygame.transform import rotate, flip
-
-SURFACE_WIDTH = 800
-SURFACE_HEIGHT = 400
-BLOCK_SIZE = 100
-
-RED = (205,0,0)
-GREEN = (50,205,50)
-BLUE = (0,0,205)
-YELLOW = (255,215,0)
-BLACK = (0,0,0)
-WHITE = (255, 255, 255)
-
-
+from parameters import *
 
 class Piece:
     def __init__(self,rotation):
         self.img = pygame.image.load("images/" + self.__class__.__name__ +  ".png").convert()
-        # print("'images/" + self.__class__.__name__ +  ".png' was loaded.")
         self.img.set_colorkey(BLACK) # Set the transparent colorkey
 
         if rotation < 4:
@@ -102,7 +89,7 @@ class GreenPin(Piece):
         super().__init__(rotation)
 
 class MainSurface:
-    def __init__(self,X_RIM=50,Y_RIM=50):
+    def __init__(self,X_RIM=DEFAULT_X_RIM,Y_RIM=DEFAULT_Y_RIM):
         pygame.init()
         self.X_RIM = X_RIM
         self.Y_RIM = Y_RIM
@@ -112,10 +99,10 @@ class MainSurface:
 
     def addPiece(self,pieceType:str,rotation:int,pos:tuple):
         '''### pos(row,col)'''
-        self.surface.blit(guiPieceGenerator(pieceType,rotation).img,(pos[1]*100,pos[0]*100))
+        self.surface.blit(guiPieceGenerator(pieceType,rotation).img,(pos[1]*BLOCK_SIZE,pos[0]*BLOCK_SIZE))
 
     def addPin(self,pinType:str,pos:tuple):
-        self.surface.blit(guiPieceGenerator(pinType,0).img,(pos[1]*100,pos[0]*100))
+        self.surface.blit(guiPieceGenerator(pinType,0).img,(pos[1]*BLOCK_SIZE,pos[0]*BLOCK_SIZE))
 
     def display(self):
         self.main_surface.blit(self.surface,(self.X_RIM,self.Y_RIM))
@@ -124,13 +111,13 @@ class MainSurface:
         for y in range(1,5):
             yletter = font.render(chr(64+y), True, WHITE)
             y_Rect = yletter.get_rect()
-            y_Rect.center = (self.X_RIM//2, self.Y_RIM + 50 + 100*(y-1))
+            y_Rect.center = (self.X_RIM//2, self.Y_RIM + BLOCK_SIZE/2 + BLOCK_SIZE*(y-1))
             self.main_surface.blit(yletter,y_Rect)
 
         for x in range(1,9):
             xletter = font.render(str(x), True, WHITE)
             x_Rect = xletter.get_rect()
-            x_Rect.center = (self.X_RIM + 50 + 100*(x-1), self.Y_RIM//2)
+            x_Rect.center = (self.X_RIM + BLOCK_SIZE/2 + BLOCK_SIZE*(x-1), self.Y_RIM//2)
             self.main_surface.blit(xletter,x_Rect)
 
         # Main loop

@@ -1,18 +1,11 @@
 import copy
 
-HEIGHT = 4
-WIDTH = 8
-
-EMPTY_GRID = [['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.'],
-              ['.','.','.','.','.','.','.','.']]
+from parameters import HEIGHT,WIDTH,EMPTY_GRID
 
 RED = 0
 GREEN = 1
 BLUE = 2
 YELLOW = 3
-
 
 class Board:
     def __init__(self,newPins):
@@ -87,7 +80,6 @@ class Board:
         startingRow = topLeft[0]
         startingColumn = topLeft[1]
         if ((startingRow < 0) or (startingColumn < 0) or (startingRow + piece.ydim) > HEIGHT) or  ((startingColumn + piece.xdim) > WIDTH):
-            # print(f'[LOG] Part of "{piece.__class__.__name__}" would be outside the grid.')
             return False
         
         # First check whether the positions are correct and the new piece would not clash with the ones that are already there.
@@ -100,14 +92,11 @@ class Board:
                     continue
                 # If position is occupied (not '.'), return False.
                 if self.grid[r][c] != '.':
-                    # print(f'[LOG] "{piece.__class__.__name__}": Position is occupied.')
                     return False
                 # If there is a pin, then the colour has to be right, and there must be a hole.
                 if (self.pins[r][c] != '.') and (self.pins[r][c] != piece.color or block != 0):
-                    # print(f'[LOG] "{piece.__class__.__name__}": No/Incorrect hole')
                     return False
         # If everything is correct, return True.
-        # print('Insert block returns True.')
         return True
 
     def insertPiece(self,id,piece,startingPos):
@@ -360,21 +349,7 @@ def pieceGenerator(pieceType:str,rot:int):
             return Yellow5(rot)
 
 if __name__ == '__main__':
-    # board = Board(['B3A', 'R6C','B2B'])
-    board = Board(['B2C','B8D'])
-    # print(board)
-    # print(Blue4(1))
-    # board.insertPiece(0,Blue4(2),(0,0))
-    # board.insertPiece(1,Blue4(0),(3,1))
-    # board.removePiece(1)
-    # print(board)
-    piece = Yellow5(0)
-    print(piece)
-    board.addPiece(1,piece,(1,3))
-    print(board)
-    # board.addPins(['Y4C'])
-    # print(board)
 
-    # for i in range(8):
-    #     print(f'Rotation: {i}')
-    #     print(RedZ(i))
+    for i in range(8):
+        print(f'Rotation: {i}')
+        print(RedZ(i))

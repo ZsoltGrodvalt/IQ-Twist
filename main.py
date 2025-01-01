@@ -1,5 +1,6 @@
 import pygame,time
-from Pieces import HEIGHT,WIDTH,Board,Piece,RedL,RedZ,Blue4,Blue5,Green3,Green4,Yellow3,Yellow5,pieceGenerator
+from Pieces import Board,Piece,RedL,RedZ,Blue4,Blue5,Green3,Green4,Yellow3,Yellow5,pieceGenerator
+from parameters import HEIGHT,WIDTH
 import GUI_Pieces
 from GUI_Pieces import SURFACE_HEIGHT,SURFACE_WIDTH,WHITE,guiPieceGenerator,MainSurface
 
@@ -33,7 +34,6 @@ def displaySolution():
     mainSurface = MainSurface(50,50)
 
     for sol in solution:
-        # [id,newPieceType,topleft,rot]
         pieceType = sol[1]
         rot = sol[2]
         topleft = sol[3]
@@ -53,7 +53,6 @@ def displaySolution():
         dict = {'A':0,'B':1,'C':2,'D':3}
         row = dict[pin[2]]
         col = int(pin[1]) - 1
-        # surface.blit(guiPieceGenerator(pieceType,0).img,(col*100,row*100))
         mainSurface.addPin(pieceType,(row,col))
 
     mainSurface.display()
@@ -66,16 +65,9 @@ def recursiveSolver(piecetype_list:list[Piece]):
     Tries to put the last piece to the top left position trying all rotations. If it doesn't succeed it returns 0.
     If a piece can be inserted, it logs the position and the rotation in the 'solution' list.
     '''
-    # print(piecetype_list)
-    # printSolutionList()
-    # print(board)
-    # displaySolution()
     topleft = emptyTopLeft()
-    # print(emptyTopLeft())
     for newPieceType in piecetype_list:
-        # print(f'>>{newPieceType}')
         for rot in range(numberOfRotations(newPieceType)):
-            # print(f'rot={rot}')
             newPiece = pieceGenerator(newPieceType,rot)
             id = 8 - len(piecetype_list)
             if board.addPiece(id,newPiece,topleft):
@@ -84,7 +76,6 @@ def recursiveSolver(piecetype_list:list[Piece]):
                 new_piecetype_list.remove(newPieceType)
                 if new_piecetype_list == []:
                     # Puzzle is solved
-                    # print('Puzzle is solved!')
                     return True
                 else:
                     # Continue with the next piece in the list.
@@ -96,12 +87,10 @@ def recursiveSolver(piecetype_list:list[Piece]):
                     else:
                         # recursion returned FALSE -> another rotation or piece has to be tried in this position.
                         solution.remove([id,newPieceType,rot,topleft])
-                        board.removePiece(id)  # (UN)COMMENT THIS to see the first fill
-                        # print(piecetype_list)
+                        board.removePiece(id)
             # Couldn't insert piece -> try the next rotation.
         # None of the rotations have suceeded -> try another piece
     # No combination was correct
-    # print('Returning False.')
     return False
 
 def solve(exerciseSetup_pieces:list,exerciseSetup_pins:list[str]):
@@ -137,7 +126,7 @@ def solve(exerciseSetup_pieces:list,exerciseSetup_pins:list[str]):
         return False
 
 if __name__ == '__main__':
-    # Starter Ex.1
+    # CHANGE THE EXERCISE SETUP HERE
     exerciseSetup_pins = ['R6B','G3C','B2B','B1C','Y4B','Y5C']
     exerciseSetup_pieces = [['Green4',6,(2,3)]]
 

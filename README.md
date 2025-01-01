@@ -19,7 +19,7 @@ You will need to install [python](https://www.python.org/downloads/) and the pyg
   pip install pygame
   ```
 ### Instructions
-To use the program, you have to add the initial pieces and pins to the board in the main.py file, then run it.
+To use the program, you have to add the initial pieces and pins to the board in the main.py file as lists, then run it.
 For example if you want to add a red pin to position '6B' and a greeen pin to '3C', type
 ```python
 exerciseSetup_pins = ['R6B','G3C']

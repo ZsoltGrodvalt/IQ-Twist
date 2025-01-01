@@ -127,7 +127,7 @@ def solve(exerciseSetup_pieces:list,exerciseSetup_pins:list[str]):
 
 if __name__ == '__main__':
     # CHANGE THE EXERCISE SETUP HERE
-    exerciseSetup_pins = ['R6B','G3C','B2B','B1C','Y4B','Y5C']
-    exerciseSetup_pieces = [['Green4',6,(2,3)]]
-
+    exerciseSetup_pins = []
+    exerciseSetup_pieces = []
+    
     solve(exerciseSetup_pieces,exerciseSetup_pins)

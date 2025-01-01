@@ -95,7 +95,7 @@ class MainSurface:
         self.Y_RIM = Y_RIM
         self.main_surface = pygame.display.set_mode((SURFACE_WIDTH+X_RIM, SURFACE_HEIGHT+Y_RIM))
         self.surface = pygame.Surface((SURFACE_WIDTH, SURFACE_HEIGHT))
-        pygame.display.set_caption("IQTwist")
+        pygame.display.set_caption("IQ Twist")
 
     def addPiece(self,pieceType:str,rotation:int,pos:tuple):
         '''### pos(row,col)'''

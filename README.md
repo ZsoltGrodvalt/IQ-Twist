@@ -34,7 +34,7 @@ exerciseSetup_pieces = [['Green4',6,(2,3)]]
 ```
 
 ### Rotations
-
+<img src="images/screenshot.png" alt="Piece" width="600" height="630">
  <table>
   <tr>
     <th></th>

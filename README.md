@@ -12,9 +12,6 @@ It's a really fun game, you can buy it [here](https://www.smartgames.eu/uk/one-p
 > [!NOTE]  
 > This is not an illegal copy of the game, you cannot move around the pieces and such, it is only meant to implement the algorithm, and display the result in the end.
 
-> [!NOTE]  
-> This is not an illegal copy of the game, you cannot move around the pieces and such, it is only meant to implement the algorithm, and display the result in the end.
-
 ### Prerequisites
 
 You will need to install [python](https://www.python.org/downloads/) and the pygame package, only for visualization.
@@ -34,8 +31,8 @@ exerciseSetup_pieces = [['Green4',6,(2,3)]]
 ```
 
 ### Rotations
-<img src="images/screenshot.png" alt="Piece" width="600" height="630">
- <table>
+<img src="images/screenshot.png" alt="Piece" width="600" height="600">
+<!-- <table>
   <tr>
     <th></th>
     <th>0</th>
@@ -135,4 +132,4 @@ exerciseSetup_pieces = [['Green4',6,(2,3)]]
     <td><img src="images/Yellow5.png" alt="Piece" width="60" height="60" style="transform: scaleX(-1) rotate(180deg); "></td>
     <td><img src="images/Yellow5.png" alt="Piece" width="60" height="60" style="transform: scaleX(-1) rotate(270deg); "></td>
   </tr>
-</table> 
+</table> -->

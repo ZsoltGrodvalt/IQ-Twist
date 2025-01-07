@@ -144,23 +144,17 @@ class RedL(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[0,1,0],[1,'','']]  
-            case 1:
-                self.shape = [[0,''],[1,''],[0,1]]  
-            case 2:
-                self.shape = [['','',1],[0,1,0]]
-            case 3:
-                self.shape = [[1,0],['',1],['',0]]  
-            case 4:
-                self.shape = [[0,1,0],['','',1]]
-            case 5:
-                self.shape = [[0,1],[1,''],[0,'']]  
-            case 6:
-                self.shape = [[1,'',''],[0,1,0]]
-            case 7:
-                self.shape = [['',0],['',1],[1,0]] 
+        shapeDict = {
+            0:[[0,1,0],[1,'','']],
+            1:[[0,''],[1,''],[0,1]],
+            2:[['','',1],[0,1,0]],
+            3:[[1,0],['',1],['',0]],
+            4:[[0,1,0],['','',1]],
+            5:[[0,1],[1,''],[0,'']],
+            6:[[1,'',''],[0,1,0]],
+            7:[['',0],['',1],[1,0]]
+        }
+        self.shape = shapeDict[rotation]
 
 class RedZ(Piece):
     def __init__(self,rotation):
@@ -170,23 +164,17 @@ class RedZ(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[1,1,''],['',0,1]]  
-            case 1:
-                self.shape = [['',1],[1,0],[1,'']]  
-            case 2:
-                self.shape = [[1,0,''],['',1,1]]
-            case 3:
-                self.shape = [['',1],[0,1],[1,'']] 
-            case 4:
-                self.shape = [['',1,1],[1,0,'']]
-            case 5:
-                self.shape = [[1,''],[1,0],['',1]]  
-            case 6:
-                self.shape = [['',0,1],[1,1,'']]
-            case 7:
-                self.shape = [[1,''],[0,1],['',1]]  
+        shapeDict = {
+            0: [[1,1,''],['',0,1]],
+            1: [['',1],[1,0],[1,'']],
+            2: [[1,0,''],['',1,1]],
+            3: [['',1],[0,1],[1,'']],
+            4: [['',1,1],[1,0,'']],
+            5: [[1,''],[1,0],['',1]],
+            6: [['',0,1],[1,1,'']],
+            7: [[1,''],[0,1],['',1]]
+        }
+        self.shape = shapeDict[rotation] 
 
 class Green3(Piece):
     def __init__(self,rotation):
@@ -196,23 +184,17 @@ class Green3(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[0,0],['',1]]  
-            case 1:
-                self.shape = [[0,1],[0,'']]  
-            case 2:
-                self.shape = [[1,''],[0,0]]  
-            case 3:
-                self.shape = [['',0],[1,0]] 
-            case 4:
-                self.shape = [[0,0],[1,'']]  
-            case 5:
-                self.shape = [[0,''],[0,1]]  
-            case 6:
-                self.shape = [['',1],[0,0]]  
-            case 7:
-                self.shape = [[1,0],['',0]] 
+        shapeDict = {
+            0: [[0,0],['',1]],
+            1: [[0,1],[0,'']],
+            2: [[1,''],[0,0]],
+            3: [['',0],[1,0]],
+            4: [[0,0],[1,'']],
+            5: [[0,''],[0,1]],
+            6: [['',1],[0,0]],
+            7: [[1,0],['',0]]
+        }
+        self.shape = shapeDict[rotation]
 
 class Green4(Piece):
     def __init__(self,rotation):
@@ -222,23 +204,17 @@ class Green4(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[1,1,0],['',0,'']]  
-            case 1:
-                self.shape = [[0,''],[1,0],[1,'']]  
-            case 2:
-                self.shape = [['',0,''],[0,1,1]]
-            case 3:
-                self.shape =[['',1],[0,1],['',0]]  
-            case 4:
-                self.shape = [[0,1,1],['',0,'']] 
-            case 5:
-                self.shape = [[1,''],[1,0],[0,'']]   
-            case 6:
-                self.shape = [['',0,''],[1,1,0]]
-            case 7:
-                self.shape = [['',0],[0,1],['',1]]  
+        shapeDict = {
+            0: [[1,1,0],['',0,'']],
+            1: [[0,''],[1,0],[1,'']],
+            2: [['',0,''],[0,1,1]],
+            3: [['',1],[0,1],['',0]],
+            4: [[0,1,1],['',0,'']],
+            5: [[1,''],[1,0],[0,'']],
+            6: [['',0,''],[1,1,0]],
+            7: [['',0],[0,1],['',1]]
+        }
+        self.shape = shapeDict[rotation] 
 
 class Blue4(Piece):
     def __init__(self,rotation):
@@ -248,15 +224,13 @@ class Blue4(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[1,0,1,1]]        #[['1','0','1','1']]
-            case 1:
-                self.shape = [[1],[1],[0],[1]]  #[['1'],['1'],['0'],['1']]
-            case 2:
-                self.shape = [[1,1,0,1]]        #[['1','1','0','1']]
-            case 3:
-                self.shape = [[1],[0],[1],[1]]  #[['1'],['0'],['1'],['1']]
+        shapeDict = {
+            0: [[1,0,1,1]],
+            1: [[1],[1],[0],[1]],
+            2: [[1,1,0,1]],
+            3: [[1],[0],[1],[1]]
+        }
+        self.shape = shapeDict[rotation]
 
 class Blue5(Piece):
     def __init__(self,rotation):
@@ -266,23 +240,17 @@ class Blue5(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[1,1,1],['',0,0]]   
-            case 1:
-                self.shape = [[1,0],[1,0],[1,'']] 
-            case 2:
-                self.shape = [[0,0,''],[1,1,1]]  
-            case 3:
-                self.shape = [['',1],[0,1],[0,1]] 
-            case 4:
-                self.shape = [[1,1,1],[0,0,'']] 
-            case 5:
-                self.shape = [[1,''],[1,0],[1,0]] 
-            case 6:
-                self.shape = [['',0,0,],[1,1,1]]  
-            case 7:
-                self.shape = [[0,1],[0,1],['',1]] 
+        shapeDict = {
+            0: [[1,1,1],['',0,0]],
+            1: [[1,0],[1,0],[1,'']],
+            2: [[0,0,''],[1,1,1]],
+            3: [['',1],[0,1],[0,1]],
+            4: [[1,1,1],[0,0,'']],
+            5: [[1,''],[1,0],[1,0]],
+            6: [['',0,0],[1,1,1]],
+            7: [[0,1],[0,1],['',1]]
+        }
+        self.shape = shapeDict[rotation]
 
 class Yellow3(Piece):
     def __init__(self,rotation):
@@ -292,15 +260,13 @@ class Yellow3(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[0,1,1]]  
-            case 1:
-                self.shape = [[1],[1],[0]] 
-            case 2:
-                self.shape = [[1,1,0]] 
-            case 3:
-                self.shape = [[0],[1],[1]]
+        shapeDict = {
+            0: [[0,1,1]],
+            1: [[1],[1],[0]],
+            2: [[1,1,0]],
+            3: [[0],[1],[1]]
+        }
+        self.shape = shapeDict[rotation]
 
 class Yellow5(Piece):
     def __init__(self,rotation):
@@ -310,23 +276,17 @@ class Yellow5(Piece):
         super().__init__()
 
     def rotatePiece(self,rotation):
-        match rotation:
-            case 0:
-                self.shape = [[0,0,''],['',1,0],['',1,'']]  
-            case 1:
-                self.shape = [['',0,''],[0,1,1],[0,'','']] 
-            case 2:
-                self.shape = [['',1,''],[0,1,''],['',0,0]] 
-            case 3:
-                self.shape = [['','',0],[1,1,0],['',0,'']]
-            case 4:
-                self.shape = [['',0,0],[0,1,''],['',1,'']]  
-            case 5:
-                self.shape = [[0,'',''],[0,1,1],['',0,''],] 
-            case 6:
-                self.shape = [['',1,''],['',1,0],[0,0,'']] 
-            case 7:
-                self.shape = [['',0,''],[1,1,0],['','',0]]
+        shapeDict = {
+            0: [[0,0,''],['',1,0],['',1,'']],
+            1: [['',0,''],[0,1,1],[0,'','']],
+            2: [['',1,''],[0,1,''],['',0,0]],
+            3: [['','',0],[1,1,0],['',0,'']],
+            4: [['',0,0],[0,1,''],['',1,'']],
+            5: [[0,'',''],[0,1,1],['',0,'']],
+            6: [['',1,''],['',1,0],[0,0,'']],
+            7: [['',0,''],[1,1,0],['','',0]]
+        }
+        self.shape = shapeDict[rotation]
 
 
 def pieceGenerator(pieceType:str,rot:int):
@@ -352,4 +312,4 @@ if __name__ == '__main__':
 
     for i in range(8):
         print(f'Rotation: {i}')
-        print(RedZ(i))
+        print(RedL(i))
